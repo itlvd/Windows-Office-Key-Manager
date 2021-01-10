@@ -83,11 +83,13 @@ private:
 	vector<Key *> _key;
 public:
 	void printListKey();
+	int size() { return _key.size(); }
 	bool readFile();
 	bool outFile();
 	void clear();
 	void add(string type, string key, string status, string subtype);
-
+	void editStatus(int index, string status);
+	void del(int index);
 
 	//----------------------------------------------------------Sorting--------------------------
 	//void SortListKey(bool type, bool isascending = 1);// sort with type retail or VL

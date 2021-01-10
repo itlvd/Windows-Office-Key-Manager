@@ -104,12 +104,11 @@ bool ListKey::readFile() {
 void ListKey::printListKey() {
 	int n = _key.size();
 	cout << "\tBy: Le Van Dong\n\tWebsite: https://levandong.com\n\tForum: https://vn-z.vn\n\n";
-	cout << "|  KEY                            |     Status      |  Type    |  Detail                     |  Last Modified        |\n";
-	cout << "|=================================|=================|==========|=============================|=======================|\n";
+	cout << "|  ID  |  KEY                            |     Status      |  Type    |  Detail                     |  Last Modified        |\n";
+	cout << "|======|=================================|=================|==========|=============================|=======================|\n";
 	for (int i = 0; i < n; i++) {
 		string status = _key[i]->getStatus();
 		if ( status == "online") {
-			
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN | FOREGROUND_INTENSITY);
 		}
 		else if (status == "get web" ) {
@@ -124,7 +123,7 @@ void ListKey::printListKey() {
 		else {
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
 		}
-		cout << _key[i]->toString() << endl;
+		cout << "|   " << i + 1 << "  " << _key[i]->toString() << endl;
 	}
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
 }
@@ -171,4 +170,13 @@ void ListKey::add(string type, string key, string status, string subtype) {
 	temp->setStatus(status);
 	_key.push_back(temp);
 
+}
+
+void ListKey::editStatus(int index, string status) {
+	time_t now = time(0);
+	_key[index - 1]->setStatus(status);
+	_key[index - 1]->setDateKey(now);
+}
+void ListKey::del(int index) {
+	_key.erase(_key.begin() + index - 1);
 }
