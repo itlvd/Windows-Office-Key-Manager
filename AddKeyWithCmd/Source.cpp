@@ -132,6 +132,7 @@ int main() {
 		cout << "Nhap status cua key (Online, get web, by phone): \n";
 		getline(cin, status);
 		key.add(type, keytext, status, subtype);
+		system("cls");
 		key.printListKey();
 		gotoxy(130, 5);
 		cout << "Home(h)";
