@@ -5,7 +5,8 @@
 
 using namespace std;
 
-const int numselectWelcome = 2;
+const int numselectWelcome = 3;
+
 
 void FixConsoleWindow();
 void gotoxy(short x, short y);
@@ -19,3 +20,7 @@ void screenWindows();
 int selectionOfWindows();
 void screenOffice();
 int selectionOfOffice();
+void screenStatus(int x);
+int selectionOfStatus(int x);
+void screenMenu();
+int selectionOfMenu();

@@ -108,16 +108,16 @@ void ListKey::printListKey() {
 	cout << "|======|=================================|=================|==========|=============================|=======================|\n";
 	for (int i = 0; i < n; i++) {
 		string status = _key[i]->getStatus();
-		if ( status == "online") {
+		if ( status == "online" || status == "Online") {
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN | FOREGROUND_INTENSITY);
 		}
-		else if (status == "get web" ) {
+		else if (status == "get web" || status == "Get Web" ) {
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
 		}
-		else if (status == "die") {
+		else if (status == "die" || status == "Die" || status == "Block" || status == "block" || status == "Blocked") {
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_INTENSITY);
 		}
-		else if (status == "by phone") {
+		else if (status == "by phone" || status == "byphone" || status == "By Phone") {
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_BLUE | FOREGROUND_INTENSITY);
 		}
 		else {
@@ -179,4 +179,166 @@ void ListKey::editStatus(int index, string status) {
 }
 void ListKey::del(int index) {
 	_key.erase(_key.begin() + index - 1);
+}
+void ListKey::push_back(Key* key) {
+	_key.push_back(key);
+}
+
+string wiring() {
+	string str = "\0";
+	for (int i = 0; i < 5; i++) {
+		string temp;
+		getline(cin, temp, '\n');
+		str = str + temp + " ";
+	}
+	return str;
+}
+
+Key* parse(string temp) {
+	string keytext = "\0";
+	string type = "\0";
+	string subtype = "\0";
+	string status = "\0";
+
+	size_t key_s = temp.find("Key: ");
+	size_t key_send = temp.find(" ", key_s + 6);
+	keytext = temp.substr(key_s + 5, 29);
+
+	size_t retail_found = temp.find("Retail");
+
+	if (retail_found != string::npos) type = "Retail";
+	else type = "Volume";
+
+	size_t subtype_s = temp.find("Win 10 RTM Professional");
+	if (subtype_s != string::npos) {
+		subtype = "Win10 Pro";
+		goto STATUS;
+	}
+
+	subtype_s = temp.find("Win 10 RTM Education Retail");
+	if (subtype_s != string::npos) {
+		subtype = "Win10 Edu";
+		goto STATUS;
+	}
+
+	subtype_s = temp.find("Win 10 RTM EnterpriseS");
+	if (subtype_s != string::npos) {
+		size_t ltsc = temp.find("[RS5]X21");
+		if (ltsc != string::npos) {
+			subtype = "LTSC";
+			goto STATUS;
+		}
+		else {
+			subtype = "LTSB";
+			goto STATUS;
+		}
+	}
+
+	subtype_s = temp.find("Win 10 RTM Enterprise");
+	if (subtype_s != string::npos) {
+		subtype = "Win10 Enterprise";
+		goto STATUS;
+	}
+
+	subtype_s = temp.find("ProPlus2019");
+	if (subtype_s != string::npos) {
+		subtype = "ProPlus2019";
+		goto STATUS;
+	}
+
+	subtype_s = temp.find("Office16_ProPlus");
+	if (subtype_s != string::npos) {
+		subtype = "ProPlus2016";
+		goto STATUS;
+	}
+
+	subtype_s = temp.find("HomeBusiness2019");
+	if (subtype_s != string::npos) {
+		subtype = "HomeAndBusiness2019";
+		goto STATUS;
+	}
+
+	subtype_s = temp.find("HomeBusines");
+	if (subtype_s != string::npos) {
+		subtype = "HomeAndBusiness2016";
+		goto STATUS;
+	}
+
+	subtype_s = temp.find("HomeStudent2019");
+	if (subtype_s != string::npos) {
+		subtype = "HomeAndStudent2019";
+		goto STATUS;
+	}
+
+	subtype_s = temp.find("HomeStudent");
+	if (subtype_s != string::npos) {
+		subtype = "HomeAndStudent2016";
+		goto STATUS;
+	}
+
+	subtype_s = temp.find("ProjectPro2019");
+	if (subtype_s != string::npos) {
+		subtype = "ProjectPro2019";
+		goto STATUS;
+	}
+
+	subtype_s = temp.find("Office16_ProjectPro");
+	if (subtype_s != string::npos) {
+		subtype = "ProjectPro2016";
+		goto STATUS;
+	}
+
+	subtype_s = temp.find("VisioPro2019");
+	if (subtype_s != string::npos) {
+		subtype = "VisioPro2019";
+		goto STATUS;
+	}
+
+	subtype_s = temp.find("Office16_VisioPro");
+	if (subtype_s != string::npos) {
+		subtype = "VisioPro2016";
+		goto STATUS;
+	}
+
+
+
+STATUS:
+	size_t status_s = temp.find("Online");
+	if (status_s != string::npos) {
+		status = "Online";
+	}
+
+	status_s = temp.find("0xC004C008");
+	if (status_s != string::npos) {
+		status = "Get web";
+	}
+
+	status_s = temp.find("0xC004C060");
+	if (status_s != string::npos) {
+		status = "Block";
+	}
+
+	status_s = temp.find("Get Web");
+	if (status_s != string::npos) {
+		status = "Get Web";
+	}
+
+	status_s = temp.find("Remaining: ");
+	if (status_s != string::npos) {
+		size_t pos = temp.find(" ", status_s + 12);
+		status = temp.substr(status_s + 11, pos - status_s - 11);
+	}
+
+	Key *key;
+
+	if (type == "Retail") key = new KeyRetail();
+	else key = new KeyVL();
+
+	key->setTextKey(keytext);
+	key->setSubTypeKey(subtype);
+	key->setStatus(status);
+
+	time_t now = time(0);
+	key->setDateKey(now);
+	return key;
 }

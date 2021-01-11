@@ -46,6 +46,11 @@ void SelectionInScreenWelcome(int selection) {
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
 		cout << "Show List Key";
 		break;
+	case 2:
+		gotoxy(65, 11);
+		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
+		cout << "Quick Add";
+		break;
 	default:
 		break;
 	}
@@ -63,6 +68,10 @@ void restoreColorInScreenWelcome(int selection) {
 		gotoxy(63, 10);
 		cout << "Show List Key";
 		break;
+	case 2:
+		gotoxy(65, 11);
+		cout << "Quick Add";
+		break;
 	default:
 		break;
 	}
@@ -78,7 +87,7 @@ void screenWelcome() {
 	cout << "Author: Le Van Dong";
 	Sleep(100);
 	gotoxy1(x + 7, 3);
-	cout << "Version: 1.0";
+	cout << "Version: 1.1";
 	Sleep(100);
 	gotoxy1(x + 2, 4);
 	cout << "**Developer with love**";
@@ -104,25 +113,18 @@ void screenWelcome() {
 	cout << char(92) << char(92) << "                                       //\n";
 	gotoxy(x1 + 3, 11);
 	cout << char(92) << char(92) << "                                     //\n";
-	/*gotoxy(x1 + 4, 12);
+	gotoxy(x1 + 4, 12);
 	cout << char(92) << char(92) << "                                   //\n";
 	gotoxy(x1 + 5, 13);
-	cout << char(92) << char(92) << "                                 //\n";*/
-	/*gotoxy(x1 + 6, 14);
-	cout << char(92) << char(92) << "                               //\n";
-	gotoxy(x1 + 7, 15);
-	cout << char(92) << char(92) << "                             //\n";
-	gotoxy(x1 + 8, 16);
-	cout << char(92) << char(92) << "                           //\n";
-	gotoxy(x1 + 9, 17);
-	cout << char(92) << char(92) << "                         //\n";
-	gotoxy(x1 + 10, 18);
-	cout << char(92) << char(92) << "                       //\n";*/
+	cout << char(92) << char(92) << "                                 //\n";
+	
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
 	gotoxy(x1 + 21, 9);
 	cout << "Add Key";
 	gotoxy(x1 + 18, 10);
 	cout << "Show List Key";
+	gotoxy(x1 + 20, 11);
+	cout << "Quick Add";
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
 
 }
@@ -132,6 +134,37 @@ int selectionOfWelcome() {
 	char c; // selection
 	int now = 0;
 	while (true) {
+		//SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
+		//gotoxy(63, 17);
+		//cout << "   -------";
+		//gotoxy(63, 18);
+		//cout << "  /  UP  /|";
+		//gotoxy(63, 19);
+		//cout << " /------/ |";
+		//gotoxy(63, 20);
+		//cout << " |      | /";
+		//gotoxy(63, 21);
+		//cout << " |------|/";
+		//Sleep(100);
+		////==============================
+		//gotoxy(63, 17);
+		//cout << "              ";
+		//gotoxy(63, 18);
+		//cout << "              ";
+		//gotoxy(63, 19);
+		//cout << "              ";
+		//gotoxy(63, 20);
+		//cout << "               ";
+		//gotoxy(63, 21);
+		//cout << "               ";
+		//===============================
+		/*
+   -------
+  /  UP  /|
+ /------/ /
+ |------|/
+		*/
+
 		c = _getch();
 		if (c == '\r') {
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY); 
@@ -411,7 +444,7 @@ void screenOffice() {
 	cout << "Khac";
 }
 
-/*1-5 2019 10-15 2016 => easy calculator*/
+/*1-5 2019 10-15 2016 => easy calculate*/
 void selectionInOfficeScreen(int selection) {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
 
@@ -572,5 +605,231 @@ int selectionOfOffice() {
 		else if (now == 6) now = 16;
 		else if (now == 17) now -= 7;
 		selectionInOfficeScreen(now);
+	}
+}
+
+void screenStatus(int x) {
+
+	if (x == 65) {
+		gotoxy(x, 1);
+		cout << "Choose status: ";
+	}
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
+
+	gotoxy(x, 5);
+	cout << "Online    ";
+	gotoxy(x, 6);
+	cout << "Get Web    ";
+	gotoxy(x, 7);
+	cout << "By Phone    ";
+	gotoxy(x, 8);
+	cout << "Block      ";
+	gotoxy(x, 9);
+	cout << "etc       ";
+	gotoxy(x, 10);
+	cout << "                  ";
+
+}
+
+void selectionInStatusScreen(int selection, int x) {
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
+
+	switch (selection)
+	{
+	case 0:
+		gotoxy(x, 5);
+		cout << "Online";
+		break;
+	case 1:
+		gotoxy(x, 6);
+		cout << "Get Web";
+		break;
+	case 2:
+		gotoxy(x, 7);
+		cout << "By Phone";
+		break;
+	case 3:
+		gotoxy(x, 8);
+		cout << "Block";
+		break;
+	case 4:
+		gotoxy(x, 9);
+		cout << "etc";
+		break;
+	default:
+		break;
+	}
+}
+
+void restoreColorInStatusScreen(int selection, int x) {
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
+
+	switch (selection)
+	{
+	case 0:
+		gotoxy(x, 5);
+		cout << "Online";
+		break;
+	case 1:
+		gotoxy(x, 6);
+		cout << "Get Web";
+		break;
+	case 2:
+		gotoxy(x, 7);
+		cout << "By Phone";
+		break;
+	case 3:
+		gotoxy(x, 8);
+		cout << "Block";
+		break;
+	case 4:
+		gotoxy(x, 9);
+		cout << "etc";
+		break;
+	default:
+		break;
+	}
+}
+
+int selectionOfStatus(int x) {
+	selectionInStatusScreen(0, x); // Moi vo thi chon cai 1
+	char c; // selection
+	int now = 0;
+	while (true) {
+		c = _getch();
+		if (c == '\r') {
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+			return now;
+		}
+		else if (c == 72) { // Turn up
+			restoreColorInStatusScreen(now, x);
+			now--;
+		}
+		else if (c == 80) { // Turn down
+			restoreColorInStatusScreen(now, x);
+			now++;
+		}
+		if (now < 0) {
+			now = 4;
+		}
+		else if (now > 4) {
+			now = 0;
+		}
+		selectionInStatusScreen(now, x);
+	}
+}
+
+void screenMenu() {
+
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
+
+	gotoxy(130, 5);
+	cout << "Home     ";
+	gotoxy(130, 6);
+	cout << "Add        ";
+	gotoxy(130, 7);
+	cout << "Quick Add    ";
+	gotoxy(130, 8);
+	cout << "Edit Status";
+	gotoxy(130, 9);
+	cout << "Delete Key";
+	gotoxy(130, 10);
+	cout << "Save, Exit";
+
+}
+
+void selectionInMenuScreen(int selection) {
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
+
+	switch (selection)
+	{
+	case 0:
+		gotoxy(130, 5);
+		cout << "Home";
+		break;
+	case 1:
+		gotoxy(130, 6);
+		cout << "Add";
+		break;
+	case 2:
+		gotoxy(130, 7);
+		cout << "Quick Add";
+		break;
+	case 3:
+		gotoxy(130, 8);
+		cout << "Edit Status";
+		break;
+	case 4:
+		gotoxy(130, 9);
+		cout << "Delete Key";
+		break;
+	case 5:
+		gotoxy(130, 10);
+		cout << "Save, Exit";
+		break;
+	default:
+		break;
+	}
+}
+
+void restoreColorInMenuScreen(int selection) {
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY);
+
+	switch (selection)
+	{
+	case 0:
+		gotoxy(130, 5);
+		cout << "Home";
+		break;
+	case 1:
+		gotoxy(130, 6);
+		cout << "Add";
+		break;
+	case 2:
+		gotoxy(130, 7);
+		cout << "Quick Add";
+		break;
+	case 3:
+		gotoxy(130, 8);
+		cout << "Edit Status";
+		break;
+	case 4:
+		gotoxy(130, 9);
+		cout << "Delete Key";
+		break;
+	case 5:
+		gotoxy(130, 10);
+		cout << "Save, Exit";
+		break;
+	default:
+		break;
+	}
+}
+
+int selectionOfMenu() {
+	selectionInMenuScreen(0); // Moi vo thi chon cai 1
+	char c; // selection
+	int now = 0;
+	while (true) {
+		c = _getch();
+		if (c == '\r') {
+			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+			return now;
+		}
+		else if (c == 72) { // Turn up
+			restoreColorInMenuScreen(now);
+			now--;
+		}
+		else if (c == 80) { // Turn down
+			restoreColorInMenuScreen(now);
+			now++;
+		}
+		if (now < 0) {
+			now = 5;
+		}
+		else if (now > 5) {
+			now = 0;
+		}
+		selectionInMenuScreen(now);
 	}
 }

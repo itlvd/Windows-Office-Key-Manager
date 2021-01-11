@@ -12,6 +12,8 @@
 #include"screen.h"
 using namespace std;
 
+//extern bool isedited = false; // check have any edit by user? If yes => save. If no => don't save.
+
 class Key {
 private:
 	string _text_key;
@@ -90,6 +92,7 @@ public:
 	void add(string type, string key, string status, string subtype);
 	void editStatus(int index, string status);
 	void del(int index);
+	void push_back(Key* key);
 
 	//----------------------------------------------------------Sorting--------------------------
 	//void SortListKey(bool type, bool isascending = 1);// sort with type retail or VL
@@ -98,3 +101,6 @@ public:
 
 	//----------------------------------------------------------Finding--------------------------
 };
+
+Key* parse(string temp);
+string wiring();

@@ -1,0 +1,8 @@
+﻿  function.cpp
+D:\Mega.nz\C O D E\C++\AddKeyWithCmd\AddKeyWithCmd\function.h(88,13): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+D:\Mega.nz\C O D E\C++\AddKeyWithCmd\AddKeyWithCmd\function.cpp(105,21): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\Mega.nz\C O D E\C++\AddKeyWithCmd\AddKeyWithCmd\function.cpp(140,21): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+D:\Mega.nz\C O D E\C++\AddKeyWithCmd\AddKeyWithCmd\function.cpp(150,21): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  screen.cpp
+  Generating Code...
+  AddKeyWithCmd.vcxproj -> D:\Mega.nz\C O D E\C++\AddKeyWithCmd\x64\Debug\AddKeyWithCmd.exe
